@@ -10,11 +10,12 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:padding="8dp" />
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
         android:layout_weight="2"
+        android:gravity="center_vertical"
         android:orientation="vertical">
 
         <TextView
