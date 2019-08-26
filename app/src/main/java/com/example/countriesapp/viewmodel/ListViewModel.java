@@ -4,10 +4,13 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.countriesapp.di.DaggerApiComponent;
 import com.example.countriesapp.model.CountriesService;
 import com.example.countriesapp.model.CountryModel;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -20,9 +23,15 @@ public class ListViewModel extends ViewModel {
     public MutableLiveData<Boolean> countryLoadError = new MutableLiveData<Boolean>();
     public MutableLiveData<Boolean> loading = new MediatorLiveData<Boolean>();
 
-    private CountriesService countriesService = CountriesService.getInstance();
+    @Inject
+    public CountriesService countriesService;
 
     private CompositeDisposable disposable = new CompositeDisposable();
+
+    public ListViewModel() {
+        super();
+        DaggerApiComponent.create().inject(this);
+    }
 
     public void refresh() {
         fetchCountries();
