@@ -1,7 +1,6 @@
 package com.example.countriesapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,7 +16,6 @@ import com.example.countriesapp.model.CountryModel;
 import com.example.countriesapp.viewmodel.ListViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
         countryList.setLayoutManager(new LinearLayoutManager(this));
         countryList.setAdapter(adapter);
+
+        refreshLayout.setOnRefreshListener(() -> {
+            viewModel.refresh();
+            refreshLayout.setRefreshing(false);
+        });
 
         observeViewModel();
     }
